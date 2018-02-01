@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8" session="true"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Insert title here</title>
+<link rel="StyleSheet" href="res/mc.css" type="text/css" title="cse4413" media="screen, print"/>
+<script type="text/javascript" src="res/mc.js">;</script>
+</head>
+<body>
+	<form action="" method="POST" onsubmit="return validate();">
+		<fieldset>
+			<legend>${legendName}</legend>
+			<table>
+				<tr>
+					<td class="error">
+						<c:if test="${not empty sessionScope['errorMessage']}">
+							${sessionScope['errorMessage']}
+						</c:if>
+					</td>
+				</tr>
+				<tr>
+					<td><label for="principal" id="principalLabel">Principal<span id="principalError" class="error"></span></label>
+						<p>(total loan amount after studies)</p>
+					</td>
+					<td><input type="number" id="principal" name="principal" step="0.01" value="${sessionScope['principal']}"/></td>
+				</tr>
+				
+				<c:choose>
+				<c:when test="${fixedPeriod lt 0}">
+				<tr>
+					<td><label for="interest">Annual Interest Rate<span id="interestError" class="error"></span></label></td>
+					<td><input type="number" id="interest" name="interest" step="0.01" value="${sessionScope['interest']}"/></td>
+				</tr>
+				<tr>
+					<td><label for="period">Payment Period<span id="periodError" class="error"></span></label>
+						<p>(total number of months)</p>
+					</td>
+					<td><input type="number" id="period" name="period" step="1" value="${sessionScope['period']}"/></td>
+				</tr>
+				</c:when>
+				<c:otherwise>
+				<tr>
+					<td><label>Annual Interest Rate<span id="interestError" class="error"></span></label></td>
+					<td><input type="radio" id="interest" name="interest" value="4.5" />4.5</td>
+					<td><input type="radio" id="interest" name="interest" value="5.5" />5.5</td>
+					<td><input type="radio" id="interest" name="interest" value="6.5" />6.5</td>
+				</tr>
+				</c:otherwise>
+				</c:choose>
+		
+				<c:if test="${fixedPeriod lt 0}">
+				<tr>
+					<td><label for="gracePeriod">Grace Period</label>
+						<p>
+							(Take advantage of 6 month grace period and
+							include grace period interest with your loan
+							balance)
+						</p>
+					</td>
+					<td>
+						
+					<c:set var="grace" scope="session" value="${sessionScope['graceEnabled']}" />
+					
+					<c:choose>
+					<c:when test="${grace != null}">
+						<input type="checkBox" id="graceEnabled" name="graceEnabled" checked="true"/>
+					</c:when>
+					<c:otherwise>
+						<input type="checkBox" id="graceEnabled" name="graceEnabled"/>
+					</c:otherwise>
+					</c:choose>
+					</td>
+				</tr>
+				</c:if>
+				<tr>
+					<td><input type="submit" value="Submit" name="submit"/></td>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
+</body>
+</html>
+</jsp:root>

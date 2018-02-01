@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8" session="true"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Result</title>
+<link rel="StyleSheet" href="res/mc.css" type="text/css" title="cse4413" media="screen, print"/>
+</head>
+<body>
+	<form action="" method="POST">
+	<fieldset>
+		<legend>${legendName}</legend>
+			<table>
+				<c:if test="${empty fixedPeriod}">
+				<tr>
+					<td>Grace Period Interest:</td>
+					<td>
+					<f:formatNumber type="currency" currencySymbol="$">${graceInterest}</f:formatNumber>
+					</td>
+				</tr>
+				</c:if>
+				
+				<tr>
+					<td>Monthly Payments:</td>
+					<td>
+					<f:formatNumber type="currency" currencySymbol="$">${monthlyPayments}</f:formatNumber>
+					</td>
+				</tr>
+				
+				<c:if test="${not empty fixedPeriod}">
+					<tr>
+						<td>Calculations are based on a fixed period of ${fixedPeriod} years, an interest of 
+						${interest}% per year</td>
+					</tr>
+				</c:if>
+				<tr>
+					<td><input type="submit" value="Recompute" name="restart"/></td>
+				</tr>
+			</table>
+	</fieldset>
+	</form>
+	
+</body>
+</html>
+</jsp:root>
