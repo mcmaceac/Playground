@@ -86,15 +86,21 @@ public class Start extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//System.out.println("doGet called! " + request.getRequestURI());
+		
 		getServletContext().setAttribute("legendName", getServletContext().getInitParameter("legendName"));
 		
 		errorMessage = null;
 		
 		Character fixedLetter = getFixedLetter(request);
-		double periodForFixedLetter = findPeriodForLetter(fixedLetter);
 		
-		getServletContext().setAttribute("legendName", getServletContext().getInitParameter("legendName") + " [" + fixedLetter + "]");
-		request.setAttribute("fixedPeriod", periodForFixedLetter);
+		if (fixedLetter != null) {	//Fixed period string detected!
+			double periodForFixedLetter = findPeriodForLetter(fixedLetter);
+			getServletContext().setAttribute("legendName", getServletContext().getInitParameter("legendName") + " [" + fixedLetter + "]");
+			System.out.println("Fixed letter: " + fixedLetter);
+			request.setAttribute("fixedPeriod", periodForFixedLetter);
+		}
+		
 		
 		//submit was not pressed, so we forward to the start page
 		if (request.getParameter("submit") == null) {
@@ -186,16 +192,7 @@ public class Start extends HttpServlet {
 			gracePeriodEnabled = request.getParameter(GRACE_ENABLED);
 		}
 		interest = request.getParameter(INTEREST);
-		
-		/*
-		System.out.println("Interest value is: " + interest);
-		System.out.println("Period value is: " + period);
-		System.out.println("Principal value is: " + principal);
-		*/
-		
-		
-		//System.out.println("gracePeriodEnabled = " + gracePeriodEnabled);
-		
+
 		fixedInterest = getServletContext().getInitParameter(FIXED_INTEREST);
 		gracePeriod = getServletContext().getInitParameter(GRACE_PERIOD);
 		

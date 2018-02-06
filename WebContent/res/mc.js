@@ -15,7 +15,7 @@ function validate() {
 	}
 	
 	p = document.getElementById("interest").value;
-	if (isNaN(p) || p <= 0 || p >= 100) {
+	if (isNaN(p) || p <= 0 || p >= 100 || p == null) {
 		document.getElementById("interestError").innerHTML = "*";
 		alert("Interest invalid!");
 		ok = false;

@@ -57,11 +57,15 @@ public class MaxPrincipal implements HttpSessionAttributeListener {
     public void updateMaxPrincipal(HttpSessionBindingEvent arg0) {
     		if (arg0.getName().equals(PRINCIPAL)) { 
 
-			double newValue = Double.parseDouble(arg0.getValue().toString());
-			
-			if (newValue > maxPrincipal) {		//replace max with new value if it is greater
-				maxPrincipal = newValue;
-			}
+    			try {
+    				double newValue = Double.parseDouble(arg0.getValue().toString());
+    				if (newValue > maxPrincipal) {		//replace max with new value if it is greater
+    					maxPrincipal = newValue;
+    				}
+    			}
+    			catch (Exception e) {
+    				
+    			}
 		}
     }
     
