@@ -45,7 +45,8 @@
 				</c:when>
 				<c:otherwise>
 				<tr>
-					<td><label>Annual Interest Rate<span id="interestError" class="error"></span></label></td>
+					<td><label>Interest Rate<span id="interestError" class="error"></span></label>
+					<br/><span style="font-size: 12px">(per year)</span></td>
 					<td><label for="interest1">4.5<input type="radio" id="interest1" name="interest" value="4.5" checked="true"/></label></td>
 					<td><label for="interest2">5.5<input type="radio" id="interest2" name="interest" value="5.5" /></label></td>
 					<td><label for="interest3">6.5<input type="radio" id="interest3" name="interest" value="6.5" /></label></td>
