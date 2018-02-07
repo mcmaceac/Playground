@@ -25,31 +25,30 @@
 						</c:if>
 				<tr>
 					<td><label for="principal" id="principalLabel">Principal<span id="principalError" class="error"></span></label>
-					<span style="font-size: 12px">(total loan amount after studies)</span></td>
-					<td><input type="number" id="principal" name="principal" step="0.01" value="${sessionScope['principal']}"/></td>
-				</tr>	
-				
+					<br/><span style="font-size: 12px">(total loan amount after studies)</span></td>
+					<td colspan="3"><input type="number" id="principal" name="principal" step="0.01" value="${sessionScope['principal']}"/></td>
+				</tr>
 				
 				<c:choose>
 				<c:when test="${empty fixedPeriod}">
-					<tr>
-						<td><label for="interest">Annual Interest Rate<span id="interestError" class="error"></span></label></td>
-						<td><input type="number" id="interest" name="interest" step="0.01" value="${sessionScope['interest']}"/></td>
-					</tr>
-					
-					<tr>
-						<td><label for="period">Payment Period<span id="periodError" class="error"></span></label>
-						<span style="font-size: 12px">(total number of months)</span></td>
-						<td><input type="number" id="period" name="period" step="1" value="${sessionScope['period']}"/></td>
-					</tr>
+				<tr>
+					<td><label for="interest">Annual Interest Rate<span id="interestError" class="error"></span></label></td>
+					<td><input type="number" id="interest" name="interest" step="0.01" value="${sessionScope['interest']}"/></td>
+				</tr>
+				
+				<tr>
+					<td><label for="period">Payment Period<span id="periodError" class="error"></span></label>
+					<br/><span style="font-size: 12px">(total number of months)</span></td>
+					<td><input type="number" id="period" name="period" step="1" value="${sessionScope['period']}"/></td>
+				</tr>
 					
 				</c:when>
 				<c:otherwise>
 				<tr>
-					<label for="interest">Annual Interest Rate<span id="interestError" class="error"></span></label>
-					<label for="interest1">4.5<input type="radio" id="interest1" name="interest" value="4.5" /></label>
-					<label for="interest2">5.5<input type="radio" id="interest2" name="interest" value="5.5" /></label>
-					<label for="interest3">6.5<input type="radio" id="interest3" name="interest" value="6.5" /></label>
+					<td><label>Annual Interest Rate<span id="interestError" class="error"></span></label></td>
+					<td><label for="interest1">4.5<input type="radio" id="interest1" name="interest" value="4.5" checked="true"/></label></td>
+					<td><label for="interest2">5.5<input type="radio" id="interest2" name="interest" value="5.5" /></label></td>
+					<td><label for="interest3">6.5<input type="radio" id="interest3" name="interest" value="6.5" /></label></td>
 				</tr>
 				</c:otherwise>
 				</c:choose>
@@ -57,7 +56,7 @@
 				<c:if test="${empty fixedPeriod}">
 					<tr>
 					<td><label for="gracePeriod">Grace Period</label>
-						<span style="font-size: 12px">
+						<br/><span style="font-size: 12px">
 							(Take advantage of 6 month grace period and
 							include grace period interest with your loan
 							balance)

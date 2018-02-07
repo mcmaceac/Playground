@@ -35,6 +35,9 @@ tr, td {
 label {
 	margin-top: 16px;
 }
+.number input {
+	float: right;
+}
 .radio label, .radio input {
-	display: inline; 
+	display: inline;
 }
